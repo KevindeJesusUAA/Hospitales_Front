@@ -1,0 +1,39 @@
+<div id="contenedor">
+    
+    <div id="formRegistro">
+        
+        <div id="texto">
+        
+            <p id="msj">Iniciar Sesión</p>
+            <p class="txt">Por favor ingresa tus datos para iniciar sesión</p>
+        </div>
+        
+        
+        <p class="pForm">Correo Electrónico<br>
+            <input type="email" name="email" required [(ngModel)]="correo">
+        </p>
+
+        <div *ngIf="!validaCorreo() && getBtnIniciarSesion()" class="alert alert-danger alerta" role="alert">
+            El correo electrónico no es válido
+        </div>
+        
+        <p class="pForm">Contraseña<br><input type="password" [(ngModel)]="password" name="contra1" id="contra1" required></p>
+        
+        <div *ngIf="!validaPassword() && getBtnIniciarSesion()" class="alert alert-danger alerta" role="alert">
+            {{mensaje}}
+        </div>
+        
+        <p><button (click)="iniciaSesion()" type="button" id="btnForm" >Iniciar Sesión</button></p>
+        <br>
+        
+        <div id="flex">
+            <p class="txt">¿No tienes cuenta de HospiCare?</p>
+            <p id="btn"><a routerLink="/registro"><button type="button" id="btnImg">Registrarse</button></a></p>
+        </div>
+    </div>
+
+    <div id="divImg">
+        <img id="imgLogo" src="../../assets/logo.jpeg" alt="">
+    </div>
+</div>
+

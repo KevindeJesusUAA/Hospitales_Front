@@ -1,0 +1,49 @@
+
+<div id="contenedor">
+        
+    <div id="divImg">
+        <img id="imgLogo" src="../../assets/logo.jpeg" alt="">
+    </div>
+    
+    <div id="formRegistro">
+        
+        <div id="texto">
+            <p id="msj">Registrarse</p>
+            <p class="txt">Por favor ingresa tus datos para ser parte de nuestra gran comunidad</p>
+        </div>
+        
+        <p class="pForm">Nombre de Usuario<br>
+            <input type="text" name="text" required [(ngModel)]="username">
+        </p>
+
+        <div *ngIf="!validaUsername() && btnRegistroClick()" class="alert alert-danger alerta" role="alert">
+            Por favor ingresa un nombre de usuario válido
+        </div>
+        
+        <p class="pForm">Correo Electrónico<br>
+            <input type="email" name="email" required [(ngModel)]="correo">
+        </p>
+
+        <div *ngIf="!validaCorreo() && btnRegistroClick()" class="alert alert-danger alerta" role="alert">
+            El correo electrónico no es válido
+        </div>
+        
+        <div id="inputFlex">
+            <p class="pForm">Contraseña<br><input type="password" [(ngModel)]="password1" name="contra1" id="contra1" required></p>
+            
+            <p class="pForm">Verificar Contraseña<br><input type="password" [(ngModel)]="password2" id="contra2" name="contra2" required></p>
+        </div>
+
+        <div *ngIf="!validaPassword() && btnRegistroClick()" class="alert alert-danger alerta" role="alert">
+            {{mensaje}}
+        </div>
+        
+        <p><button (click)="registrarUsuario()" type="button" id="btnForm" >Registrarse</button></p>
+        
+        
+        <div id="flex">
+            <p class="txt">¿Ya tienes una cuenta?</p>
+            <p id="btn"><a routerLink="/login"><button type="button" id="btnImg">Iniciar Sesión</button></a></p>
+        </div>
+    </div>
+</div>

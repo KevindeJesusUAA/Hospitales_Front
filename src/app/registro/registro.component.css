@@ -1,0 +1,137 @@
+body{
+    background-color: #e3f2fd;
+}
+
+/* Estilos del contenedor de la imagen con texto y formulario*/
+#contenedor {
+    margin-left: 80px;
+    margin-right: 80px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    /*margin-top: 115px;*/
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-rows: repeat(1,auto);
+}
+
+/*Estilos para la parte de la imagen con texto */
+#imgLogo {
+    width: 100%;
+    height: 100%;
+}
+
+#divImg {
+    width: 100%;
+    height: auto; 
+}
+
+/* Estilos para el texto de la imagen */
+#texto {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+    align-content: center;
+}
+
+#msj {
+    font-size: 35px;
+}
+
+.txt{
+    font-size: 20px;
+    color: black;
+}
+
+#btnImg {
+   font-size: 20px;
+   background-color: transparent;
+   padding: 12px;     
+}
+
+/*Estilos para el formulario */
+#formRegistro {
+    background-color: white;
+    padding-top: 5px;
+    padding-left: 30px;
+}
+
+#flex {
+    margin-top: 20px;
+    display: flex;
+    width: 92%;
+    text-align: right;
+    align-items: center;
+}
+
+#btn{
+    margin-left: auto;
+    font-size: 20px;
+    border-color: transparent;
+    border-radius: 10px;
+
+}
+
+#inputFlex {
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.pForm {
+    color: gray;
+    width: 100%;
+    line-height: 2.5;
+    font-size: 15px;
+}
+
+.alertacontra {
+    width: 90%;
+    color: white;
+}
+
+.pForm > input {
+    width: 90%;
+}
+
+.alerta{
+    color: red;
+    font-size: 15px;
+    width: 90%;
+    
+}
+
+input {
+   font-size: 20px;
+    border-radius: 10px;
+}
+
+#btnForm {
+    width: 92%;
+    font-size: 20px;
+    margin-top: 18px;
+    padding: 15px;
+    background-color: skyblue;
+    border-color: transparent;
+}
+
+#error {
+    color: red;
+    font-size: 20px;
+}
+
+@media screen and (max-width: 1000px) {
+    #contenedor #divImg {
+        grid-column: 1 / -1;
+    }
+    #contenedor #formRegistro {
+        grid-column: 1 / -1;
+    }
+}
+@media screen and (max-width: 600px) {
+    #contenedor #divImg {
+        text-align: center;
+    }
+    #contenedor #formRegistro {
+        text-align: center;
+    }
+}

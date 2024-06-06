@@ -1,0 +1,95 @@
+.headHeader {
+    font-size: 20px;
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 600;
+    margin: 0 auto;
+}
+#headestiloscolor{
+    color: black;
+}
+.headproye{
+    background-color:black;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+.headnombre{
+    color: white;
+    text-align: center;
+}
+.headlogo{
+    margin-left: 20%;
+}
+.headcabezera{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(1, auto);
+}
+.headcor{
+    text-align: center;
+}
+.headnavi{
+    text-align: center;
+}
+.headcuponesvalidos{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(1, auto);
+}
+
+@media screen and (max-width: 1100px){
+    .headcabezera .headlogo{
+        grid-column: 1 / -1;
+        margin: 0 auto;
+    }
+    .headcabezera .headnombre{
+        grid-column: 1 / -1;
+        margin: 0 auto;
+    }
+    .headcabezera .headtarjeta{
+        grid-column: 1 / -1;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (max-width: 570px){
+    .headcabezera .headlogo{
+        text-align: center;
+    }
+    .headcabezera .headnombre{
+        text-align: center;
+    }
+    .headcabezera .headtarjeta{
+        text-align: center;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (max-width: 1300px){
+    .headcuponesvalidos .headcor{
+        grid-column: 1 / -1;
+    }
+    .headcuponesvalidos .headnavi{
+        grid-column: 1 / -1;
+    }
+}
+
+@media screen and (max-width: 759px){
+    .headcuponesvalidos .headcor{
+        grid-column: 1 / -1;
+    }
+    .headcuponesvalidos .headnavi{
+        grid-column: 1 / -1;
+    }
+}
+
+@media screen and (max-width: 759px){
+    .headcuponesvalidos .headcor .headimag1{
+        width: 485px;
+    }
+    .headcuponesvalidos .headnavi .headimag2{
+        grid-column: 1 / -1;
+        width: 485px;
+    }
+}

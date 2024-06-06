@@ -1,0 +1,94 @@
+<div class="container mt-3 min-altura">
+    <h1 class="mt-3 mb-3">Reservar Cita</h1>
+    <div class="row g-3">
+      <div class="col-md-5">
+        <!--<app-calendario (propagarFecha)="procesaPropagar($event)" [borrarEnfoque]="!estadoFecha"></app-calendario>-->
+        <div class="col-md-12 mt-3">
+          <div *ngIf="estadoFecha; then fecha"></div>
+        </div>
+      </div>
+      <div class="col-md-1">
+      </div>
+      <div class="row g-3 col-md-6">
+  
+        <div class="col-md-8">
+          <label for="doctor" class="form-label">Doctor(a)</label>
+          <select class="form-select" aria-label="Default select example" [(ngModel)]="doctor" required>
+            <option value="Meredith Grey">Meredith Grey</option>
+            <option value="Addison Montgomery">Addison Montgomery</option>
+            <option value="Shaun Murphy">Shaun Murphy</option>
+            <option value="Conrad Hawkins">Conrad Hawkins</option>
+            <option value="Gregory House">Gregory House</option>
+            <option value="Lisa Cuddy">Lisa Cuddy</option>
+            <option value="James Wilson">James Wilson</option>
+            <option value="Derek Shepherd">Derek Shepherd</option>
+            <option value="Emiliano Navarro">Emiliano Navarro</option>
+            <option value="Leonardo Fuentes">Leonardo Fuentes</option>
+            <option value="Santiago Morales">Santiago Morales</option>
+            <option value="Gabriel Mendoza">Gabriel Mendoza</option>
+            <option value="Adrián Cervantes">Adrián Cervantes</option>
+            <option value="Valentina Castillo">Valentina Castillo</option>
+            <option value="Camila Espinoza">Camila Espinoza</option>
+            <option value="Fernanda Guzmán">Fernanda Guzmán</option>
+            <option value="Isabella Rosales">Isabella Rosales</option>
+            <option value="Daniela Torres">Daniela Torres</option>
+          </select>
+        </div>
+        
+        <div class="col-md-4">
+          <label for="edad" class="form-label">Tu Edad</label>
+          <input type="number" class="form-control" id="edad" [(ngModel)]="edad" required min="0">
+        </div>
+        <div class="col-md-12">
+          <div *ngIf="estadoFecha; then fechaActiva; else seleccionaFecha"></div>
+        </div>
+        <div class="col-12">
+          <div *ngIf="nombre != '' && estadoFecha && horas.length && edad!=null && doctor!=null; then botonReservar"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <ng-template #fecha>
+    <div class="alert alert-primary" role="alert">
+      <div *ngIf="nombre != ''; then mostrarNombre"></div>
+      <div *ngIf="doctor != null; then mostrarDoctor"></div>
+      <p>{{ fechaString }}</p>
+      <div *ngIf="horas.length; then mostrarhora"></div>
+    </div>
+  </ng-template>
+  
+  <ng-template #fechaActiva>
+    <div *ngIf="horas.length; then horarios; else horariosNoDisponibles"></div>
+  </ng-template>
+  
+  <ng-template #seleccionaFecha>
+    <div class="alert alert-warning" role="alert">
+      <p>Selecciona una Fecha</p>
+    </div>
+  </ng-template>
+  
+  <ng-template #horarios>
+    <h5>Horarios Disponibles</h5>
+    <select id="select-menu" [(ngModel)]="selectedOption" class="form-select" required name="actionSelection">
+      <option *ngFor="let hora of horas; index as i" [value]="i"
+        [innerHTML]="hora + ':00 - ' + (hora + 1) + ':00'"></option>
+    </select>
+  </ng-template>
+  
+  <ng-template #horariosNoDisponibles>
+    <div class="alert alert-danger" role="alert">
+      <p>Lo sentimos ya no hay citas disponibles para este dia</p>
+    </div>
+  </ng-template>
+  
+  <ng-template #botonReservar>
+    <button class="btn btn-primary" (click)="reservarCita()">Reservar Cita</button>
+  </ng-template>
+  
+  <ng-template #mostrarNombre><p>Reservacion para {{ nombre }}</p></ng-template>
+  
+  <ng-template #mostrarhora><p>{{ horas[selectedOption] }}:00 - {{ horas[selectedOption]+1 }}:00</p></ng-template>
+  
+  <ng-template #mostrarDoctor><p>Doctor(a): {{ doctor }}</p></ng-template>
+  
