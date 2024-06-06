@@ -6,11 +6,12 @@ import { AltasProductosComponent } from './altas-productos/altas-productos.compo
 import { AltasDoctoresComponent } from './altas-doctores/altas-doctores.component';
 import { AltasHospitalesComponent } from './altas-hospitales/altas-hospitales.component';
 import { ConsultasComponent } from './consultas/consultas.component';
+import { InicioComponent } from './inicio/inicio.component';
 
 export const routes: Routes = [
 
     // Rutas de la aplicación
-    //{path: 'inicio', component: InicioComponent},
+    {path: 'inicio', component: InicioComponent},
     {path: 'login', component: IniciosesionComponent},
     {path: 'registro', component: RegistroComponent},
     {path: 'altas', component: AltasComponent},
@@ -19,6 +20,6 @@ export const routes: Routes = [
     {path: 'altas-hospitales', component: AltasHospitalesComponent},
     {path: 'consultas', component: ConsultasComponent},
 
-    {path: '', redirectTo: '/login', pathMatch: 'full'}, // Ruta por defecto
+    {path: '', redirectTo: '/inicio', pathMatch: 'full'}, // Ruta por defecto
     {path: '**', component: IniciosesionComponent} // Ruta para cuando no se encuentra la ruta
 ];

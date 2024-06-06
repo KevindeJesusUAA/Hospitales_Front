@@ -99,9 +99,7 @@ export class ReservarCitaComponent implements OnInit {
     this.doctor = '';
     this.edad = 0;
     this.horas = [];
-    alertifyjs.alert('Cita Reservada', 'Se ha almacenado tu reservacion en nuestro sistema', function () {
-      alertifyjs.success('Reservacion Exitosa');
-    });    
+    alertifyjs.success('Cita Reservada');   
   }
 
   enviaCorreo(cita:Cita):void{
