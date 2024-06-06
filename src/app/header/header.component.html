@@ -14,6 +14,12 @@
           <li *ngIf="!isAuth()" class="nav-item">
             <a class="nav-link active" routerLink="registro" aria-current="page" href="#">Registrarse</a>
           </li>
+          <li *ngIf="isAdmin" class="nav-item">
+            <a class="nav-link active" routerLink="altas" aria-current="page" href="#">Altas</a>
+          </li>
+          <li *ngIf="isDoctor" class="nav-item">
+            <a class="nav-link active" routerLink="consultas" aria-current="page" href="#">Consultas</a>
+          </li>
         </ul>
         <form *ngIf="isAuth()" class="d-flex me-3">
           <input class="form-control me-2" #search type="search" placeholder="Buscar" aria-label="Search">

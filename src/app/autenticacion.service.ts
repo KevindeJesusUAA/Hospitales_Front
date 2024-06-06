@@ -8,6 +8,8 @@ export class AutenticacionService {
 
   private usuarioAutenticado: boolean = false;
   private userName: BehaviorSubject<string> = new BehaviorSubject('');
+  private rol: BehaviorSubject<string> = new BehaviorSubject(''); // Para manejar el rol del usuario
+
 
 
   constructor() { 
@@ -16,15 +18,23 @@ export class AutenticacionService {
       this.usuarioAutenticado = true;
       this.userName.next(sessionStorage.getItem('username') || '');
     }*/
+    // Recupera la información de autenticación almacenada en el sessionStorage.
+    /*if (sessionStorage.getItem('autenticado') === 'true') {
+      this.usuarioAutenticado = true;
+      this.userName.next(sessionStorage.getItem('username') || '');
+      this.rol.next(sessionStorage.getItem('rol') || ''); // Recupera el rol del usuario
+    }*/
   }
 
   // Establece la información de autenticación en el sessionStorage.
-  setLogin(id: string, username: string) {
+  setLogin(id: string, username: string, rol: string) {
     sessionStorage.setItem('autenticado', 'true');
     this.usuarioAutenticado = true;
     sessionStorage.setItem('id', id);
     sessionStorage.setItem('username', username);
+    sessionStorage.setItem('rol', rol); // Guarda el rol del usuario
     this.userName.next(username);
+    this.rol.next(rol); // Actualiza el rol
   }
 
   // Devuelve el id del usuario autenticado.
@@ -32,9 +42,19 @@ export class AutenticacionService {
     return sessionStorage.getItem('id') || '';
   }
 
+  // Devuelve el id del usuario autenticado.
+  getAdmiUsuario(): string {
+    return sessionStorage.getItem('rol') || '';
+  }
+
   // Devuelve el nombre del usuario autenticado.
   getUsername(): BehaviorSubject<string> {
     return this.userName;
+  }
+
+  // Devuelve el rol del usuario autenticado.
+  getRol(): BehaviorSubject<string> {
+    return this.rol;
   }
 
   // Elimina la información de autenticación del sessionStorage.
@@ -44,12 +64,23 @@ export class AutenticacionService {
     this.usuarioAutenticado = false; 
     sessionStorage.removeItem('id');
     sessionStorage.removeItem('username');
+    sessionStorage.removeItem('rol'); // Elimina el rol del usuario
     this.userName.next('');
+    this.rol.next(''); // Resetea el rol
   }
 
   // Devuelve true si el usuario está autenticado y false en caso contrario.
   estaAutenticado(): boolean {
     return this.usuarioAutenticado;
+  }
+
+  // Devuelve true si el usuario es administrador.
+  esAdministrador(): boolean {
+    return this.rol.value === 'admin';
+  }
+
+  esDoctor(): boolean {
+    return this.rol.value === 'doctor';
   }
 
   getHoraActual(): string {

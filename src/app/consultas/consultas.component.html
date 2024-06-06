@@ -1,0 +1,39 @@
+<div class="container mt-4">
+    <h2>Atender Consultas</h2>
+    <form [formGroup]="consultaForm" (ngSubmit)="onSubmit()">
+      <div class="fecha-hora">
+        <p class="hora">{{ horaActual }}</p>
+        <p class="fecha">{{ fechaActual }}</p>
+      </div>
+      <div class="mb-3">
+        <label for="idConsulta" class="form-label">ID Consulta</label>
+        <input type="text" class="form-control" id="idConsulta" formControlName="idConsulta">
+        <div *ngIf="consultaForm.get('idConsulta')?.invalid && consultaForm.get('idConsulta')?.touched" class="text-danger">
+          El ID de la consulta es requerido y debe ser un número.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="paciente" class="form-label">Paciente</label>
+        <input type="text" class="form-control" id="paciente" formControlName="paciente">
+        <div *ngIf="consultaForm.get('paciente')?.invalid && consultaForm.get('paciente')?.touched" class="text-danger">
+          El nombre del paciente es requerido y debe tener máximo 45 caracteres.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="diagnostico" class="form-label">Diagnóstico</label>
+        <textarea class="form-control" id="diagnostico" formControlName="diagnostico"></textarea>
+        <div *ngIf="consultaForm.get('diagnostico')?.invalid && consultaForm.get('diagnostico')?.touched" class="text-danger">
+          El diagnóstico es requerido y debe tener máximo 255 caracteres.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="tratamiento" class="form-label">Tratamiento</label>
+        <textarea class="form-control" id="tratamiento" formControlName="tratamiento"></textarea>
+        <div *ngIf="consultaForm.get('tratamiento')?.invalid && consultaForm.get('tratamiento')?.touched" class="text-danger">
+          El tratamiento es requerido y debe tener máximo 255 caracteres.
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" >Guardar Consulta y Generar PDF</button>
+    </form>
+  </div>
+  
