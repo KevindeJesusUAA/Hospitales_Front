@@ -24,7 +24,7 @@ export class RegistroComponent {
   constructor(private router: Router, private auth: AutenticacionService) {
 
     if (this.auth.estaAutenticado()) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/inicio']);
       console.log('Usuario autenticado');
     }else{
       this.router.navigate(['/registro']);

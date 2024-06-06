@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AutenticacionService } from '../autenticacion.service';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
@@ -11,7 +11,7 @@ import { RouterLink } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
 
   usuarioAutenticado: boolean = false;
   username: string = '';
@@ -22,6 +22,8 @@ export class HeaderComponent {
 
   ngOnInit() {
     this.usuarioAutenticado = this.auth.estaAutenticado();
+
+    console.log('Usuario autenticado: ' + this.usuarioAutenticado);
 
     this.userNameSubscription = this.auth.getUsername().subscribe(
         (username) => {

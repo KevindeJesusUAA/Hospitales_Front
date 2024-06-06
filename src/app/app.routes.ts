@@ -10,6 +10,6 @@ export const routes: Routes = [
     {path: 'login', component: IniciosesionComponent},
     {path: 'registro', component: RegistroComponent},
 
-    {path: '', redirectTo: '/inicio', pathMatch: 'full'}, // Ruta por defecto
+    {path: '', redirectTo: 'inicio', pathMatch: 'full'}, // Ruta por defecto
     {path: '**', component: IniciosesionComponent} // Ruta para cuando no se encuentra la ruta
 ];

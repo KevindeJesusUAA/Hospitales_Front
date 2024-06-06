@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from 'express';
 import { AutenticacionService } from '../autenticacion.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-iniciosesion',
@@ -20,7 +19,7 @@ export class IniciosesionComponent implements OnInit{
   mensaje:string = '';
 
   //constructor(private apiwishop: ApiwishopService, private router:Router,private auth:AuthService) { }
-  constructor(private auth:AutenticacionService) { }
+  constructor(private rutaActiva:Router, private auth:AutenticacionService) { }
   
   ngOnInit(): void {
     
@@ -37,6 +36,8 @@ export class IniciosesionComponent implements OnInit{
     if (this.validaCorreo() && this.validaPassword()){
 
       this.auth.setLogin('1', 'Alan Uzielo');
+
+      this.rutaActiva.navigate(['/inicio']);
 
       //window.location.href = '/inicio';
       /*this.apiwishop.iniciarSesion(this.correo, this.password).then((response: any) => {

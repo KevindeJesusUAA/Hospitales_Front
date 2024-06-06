@@ -12,10 +12,16 @@ export class AutenticacionService {
 
   constructor() { 
     // Recupera la información de autenticación almacenada en el sessionStorage.
-    /*if (sessionStorage.getItem('autenticado') == 'true') {
-      this.usuarioAutenticado = true;
-      this.userName.next(sessionStorage.getItem('username') || '');
-    }*/
+    if (typeof sessionStorage !== 'undefined') {
+      if (sessionStorage.getItem('autenticado')) {
+        if (sessionStorage.getItem('autenticado') === 'true') {
+          this.usuarioAutenticado = true;
+          this.userName.next(sessionStorage.getItem('username') || '');
+        }
+      }
+    } else {
+      console.log('sessionStorage no está disponible en este entorno.');
+    }
   }
 
   // Establece la información de autenticación en el sessionStorage.
@@ -24,7 +30,7 @@ export class AutenticacionService {
     this.usuarioAutenticado = true;
     sessionStorage.setItem('id', id);
     sessionStorage.setItem('username', username);
-    this.userName.next(username);
+    this.userName.next(username); // Actualiza el nombre del usuario autenticado.
   }
 
   // Devuelve el id del usuario autenticado.

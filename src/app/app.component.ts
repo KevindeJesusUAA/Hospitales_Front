@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { AutenticacionService } from './autenticacion.service';
@@ -14,13 +14,13 @@ import { AutenticacionService } from './autenticacion.service';
 export class AppComponent implements OnInit {
   title = 'Hospitales';
 
-  constructor(private auth: AutenticacionService){ }
+  constructor(private ruta:Router,private auth: AutenticacionService){ }
 
   ngOnInit(): void {
     if(this.auth.estaAutenticado()){
-      //window.location.href = '/inicio';
+      this.ruta.navigate(['/inicio']);
     }else{
-      //window.location.href = '/login';
+      this.ruta.navigate(['/login']);
     }
   }
 }
