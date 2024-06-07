@@ -24,10 +24,10 @@ export class IniciosesionComponent implements OnInit{
   ngOnInit(): void {
     
     // Si se recibe un usuario en el historial, se asignan los valores a los campos
-    if(history.state.usuario){
+    /*if(history.state.usuario){
       this.correo = history.state.usuario.correo;
       this.password = history.state.usuario.password;
-    }
+    }*/
   }
 
   iniciaSesion():void{
@@ -35,7 +35,7 @@ export class IniciosesionComponent implements OnInit{
     
     if (this.validaCorreo() && this.validaPassword()){
 
-      this.auth.setLogin('1', 'Alan Uzielo');
+      this.auth.setLogin('1', 'Alan Uzielo','doctor');
 
       this.rutaActiva.navigate(['/inicio']);
 

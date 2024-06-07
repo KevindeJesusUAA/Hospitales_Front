@@ -1,0 +1,19 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-end mb-4">
+    <select class="form-select w-auto" (change)="onFormChange($event)">
+      <option value="productos">Alta de Productos</option>
+      <option value="doctores">Alta de Doctores</option>
+      <option value="hospitales">Alta de Hospitales</option>
+    </select>
+  </div>
+
+  <div *ngIf="selectedForm === 'productos'">
+    <app-altas-productos></app-altas-productos>
+  </div>
+  <div *ngIf="selectedForm === 'doctores'">
+    <app-altas-doctores></app-altas-doctores>
+  </div>
+  <div *ngIf="selectedForm === 'hospitales'">
+    <app-altas-hospitales></app-altas-hospitales>
+  </div>
+</div>

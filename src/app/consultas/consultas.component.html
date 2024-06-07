@@ -1,0 +1,39 @@
+<div class="container mt-4">
+    <h2>Atender Consultas</h2>
+    <form [formGroup]="consultaForm" (ngSubmit)="onSubmit()">
+      <div class="fecha-hora">
+        <p class="hora">{{ horaActual }}</p>
+        <p class="fecha">{{ fechaActual }}</p>
+      </div>
+      <div class="mb-3">
+        <label for="idConsulta" class="form-label">ID Consulta</label>
+        <input type="text" class="form-control" id="idConsulta" formControlName="idConsulta">
+        <div *ngIf="consultaForm.get('idConsulta')?.invalid && consultaForm.get('idConsulta')?.touched" class="text-danger">
+          El ID de la consulta es requerido y debe ser un número.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="paciente" class="form-label">Paciente</label>
+        <input type="text" class="form-control" id="paciente" formControlName="paciente">
+        <div *ngIf="consultaForm.get('paciente')?.invalid && consultaForm.get('paciente')?.touched" class="text-danger">
+          El nombre del paciente es requerido y debe tener máximo 45 caracteres.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="diagnostico" class="form-label">Diagnóstico</label>
+        <textarea class="form-control" id="diagnostico" formControlName="diagnostico"></textarea>
+        <div *ngIf="consultaForm.get('diagnostico')?.invalid && consultaForm.get('diagnostico')?.touched" class="text-danger">
+          El diagnóstico es requerido y debe tener máximo 255 caracteres.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="tratamiento" class="form-label">Tratamiento</label>
+        <textarea class="form-control" id="tratamiento" formControlName="tratamiento"></textarea>
+        <div *ngIf="consultaForm.get('tratamiento')?.invalid && consultaForm.get('tratamiento')?.touched" class="text-danger">
+          El tratamiento es requerido y debe tener máximo 255 caracteres.
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" >Guardar Consulta y Generar PDF</button>
+    </form>
+  </div>
+  <iframe src="http://172.16.113.76:5601/app/visualize#/edit/a58ea520-23b0-11ef-8c68-0b87d4bd3319?embed=true&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-15m,to:now))&_a=(filters:!(),linked:!f,query:(language:kuery,query:''),uiState:(),vis:(aggs:!((enabled:!t,id:'1',params:(),schema:metric,type:count),(enabled:!t,id:'2',params:(field:categoria,missingBucket:!f,missingBucketLabel:Missing,order:asc,orderBy:'1',otherBucket:!f,otherBucketLabel:Other,size:10),schema:segment,type:terms)),params:(addLegend:!t,addTimeMarker:!f,addTooltip:!t,categoryAxes:!((id:CategoryAxis-1,labels:(filter:!f,rotate:0,show:!t,truncate:200),position:left,scale:(type:linear),show:!t,style:(),title:(),type:category)),grid:(categoryLines:!f),labels:(),legendPosition:right,seriesParams:!((data:(id:'1',label:Count),drawLinesBetweenPoints:!t,lineWidth:2,mode:normal,show:!t,showCircles:!t,type:histogram,valueAxis:ValueAxis-1)),thresholdLine:(color:%23E7664C,show:!f,style:full,value:10,width:1),times:!(),type:histogram,valueAxes:!((id:ValueAxis-1,labels:(filter:!t,rotate:75,show:!t,truncate:100),name:LeftAxis-1,position:bottom,scale:(mode:normal,type:linear),show:!t,style:(),title:(text:Count),type:value))),title:tipomedicamentos,type:horizontal_bar))" height="600" width="800"></iframe>

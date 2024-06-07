@@ -1,0 +1,44 @@
+<div class="container mt-4">
+    <h2>Altas de Productos</h2>
+    <form [formGroup]="productoForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="idProducto" class="form-label">ID Producto</label>
+        <input type="text" class="form-control" id="idProducto" formControlName="idProducto">
+        <div *ngIf="productoForm.get('idProducto')?.invalid && productoForm.get('idProducto')?.touched" class="text-danger">
+          El ID del producto es requerido.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="nombre" formControlName="nombre">
+        <div *ngIf="productoForm.get('nombre')?.invalid && productoForm.get('nombre')?.touched" class="text-danger">
+          El nombre es requerido.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="cantidad" class="form-label">Cantidad</label>
+        <input type="number" class="form-control" id="cantidad" formControlName="cantidad">
+        <div *ngIf="productoForm.get('cantidad')?.invalid && productoForm.get('cantidad')?.touched" class="text-danger">
+          La cantidad es requerida y debe ser mayor a 0.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="categoria" class="form-label">Categoría</label>
+        <input type="text" class="form-control" id="categoria" formControlName="categoria">
+        <div *ngIf="productoForm.get('categoria')?.invalid && productoForm.get('categoria')?.touched" class="text-danger">
+          La categoría es requerida.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="Hospital_idHospital" class="form-label">Hospital</label>
+        <select class="form-select" id="Hospital_idHospital" formControlName="Hospital_idHospital">
+          <option value="" disabled selected>Seleccione un hospital</option>
+          <option *ngFor="let hospital of hospitales" [value]="hospital.id">{{ hospital.nombre }}</option>
+        </select>
+        <div *ngIf="productoForm.get('Hospital_idHospital')?.invalid && productoForm.get('Hospital_idHospital')?.touched" class="text-danger">
+          Seleccione un hospital.
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="productoForm.invalid">Guardar</button>
+    </form>
+  </div>

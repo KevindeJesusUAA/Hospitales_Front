@@ -1,0 +1,34 @@
+<div class="container mt-4">
+  <h2>Altas de Hospitales</h2>
+  <form [formGroup]="hospitalForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="idHospital" class="form-label">ID Hospital</label>
+      <input type="text" class="form-control" id="idHospital" formControlName="idHospital">
+      <div *ngIf="hospitalForm.get('idHospital')?.invalid && hospitalForm.get('idHospital')?.touched" class="text-danger">
+        El ID del hospital es requerido y debe ser un número.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="nombre" class="form-label">Nombre</label>
+      <input type="text" class="form-control" id="nombre" formControlName="nombre">
+      <div *ngIf="hospitalForm.get('nombre')?.invalid && hospitalForm.get('nombre')?.touched" class="text-danger">
+        El nombre es requerido y debe tener máximo 50 caracteres.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="direccion" class="form-label">Dirección</label>
+      <input type="text" class="form-control" id="direccion" formControlName="direccion">
+      <div *ngIf="hospitalForm.get('direccion')?.invalid && hospitalForm.get('direccion')?.touched" class="text-danger">
+        La dirección es requerida y debe tener máximo 100 caracteres.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="telefono" class="form-label">Teléfono</label>
+      <input type="text" class="form-control" id="telefono" formControlName="telefono">
+      <div *ngIf="hospitalForm.get('telefono')?.invalid && hospitalForm.get('telefono')?.touched" class="text-danger">
+        El teléfono es requerido y debe tener entre 10 y 13 dígitos.
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="hospitalForm.invalid">Guardar</button>
+  </form>
+</div>

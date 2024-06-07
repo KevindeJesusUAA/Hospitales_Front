@@ -15,7 +15,10 @@ export class HeaderComponent implements OnInit{
 
   usuarioAutenticado: boolean = false;
   username: string = '';
+  isAdmin: boolean = false;
+  isDoctor: boolean = false;
   private userNameSubscription: Subscription = new Subscription();
+  private rolSubscription: Subscription = new Subscription();
   mensaje: string = '';
 
   constructor(private auth: AutenticacionService) {}
@@ -30,6 +33,18 @@ export class HeaderComponent implements OnInit{
           this.username = username
         }
       );
+
+    this.rolSubscription = this.auth.getRol().subscribe(
+        (rol) => {
+          this.isAdmin = rol === 'admin';
+        }
+      );
+    
+    this.rolSubscription = this.auth.getRol().subscribe(
+        (rol) => {
+          this.isDoctor = rol === 'doctor';
+        }
+      );
   }
 
   isAuth():boolean{
@@ -42,6 +57,7 @@ export class HeaderComponent implements OnInit{
 
   ngOnDestroy() {
     this.userNameSubscription.unsubscribe();
+    this.rolSubscription.unsubscribe();
   }
 
   getHoraActual() {
@@ -54,6 +70,7 @@ export class HeaderComponent implements OnInit{
     this.username = '';
     this.mensaje = '';
     this.userNameSubscription.unsubscribe();
+    this.rolSubscription.unsubscribe();
   }
 
   busqueda(producto: string) {
