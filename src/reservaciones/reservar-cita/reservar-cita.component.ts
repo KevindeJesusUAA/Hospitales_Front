@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Cita } from '../cita.model';
-import * as alertifyjs from 'alertifyjs';
+import swal from 'sweetalert';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CalendarioComponent } from '../calendario/calendario.component';
@@ -12,6 +12,7 @@ import { CalendarioComponent } from '../calendario/calendario.component';
   templateUrl: './reservar-cita.component.html',
   styleUrl: './reservar-cita.component.css'
 })
+
 export class ReservarCitaComponent implements OnInit {
   estadoFecha: boolean = false;
   fecha: any;
@@ -99,7 +100,7 @@ export class ReservarCitaComponent implements OnInit {
     this.doctor = '';
     this.edad = 0;
     this.horas = [];
-    alertifyjs.success('Cita Reservada');   
+    swal("Cita Reservada", "La cita se ha reservado correctamente", "success");
   }
 
   enviaCorreo(cita:Cita):void{

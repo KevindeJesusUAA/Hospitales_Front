@@ -35,7 +35,7 @@ export class IniciosesionComponent implements OnInit{
     
     if (this.validaCorreo() && this.validaPassword()){
 
-      this.auth.setLogin('1', 'Alan Uzielo','doctor');
+      this.auth.setLogin('1', 'Alan Uzielo','admin');
 
       this.rutaActiva.navigate(['/inicio']);
 

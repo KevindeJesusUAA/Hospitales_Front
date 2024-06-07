@@ -1,0 +1,19 @@
+#divBtn {
+    width: 30%;
+    margin: 0 auto;
+  }
+  
+  #btn {
+    padding: 5px;
+    font-size: 18px;
+  }
+  
+  .divQR{
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 5%;
+  }
+  
+  .min-altura{
+    min-height: 500px;
+  }

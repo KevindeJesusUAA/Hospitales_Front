@@ -1,0 +1,59 @@
+.calendario{
+    text-align: center;
+}
+
+ol{
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    font-size: 15px;
+}
+
+h2 {
+    margin-bottom: 4px;
+    padding: 0;
+}
+
+.first-day {
+    grid-column-start: var(--first-day-start, 0);
+}
+
+.day-name{
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 2px;
+    padding: 4px;
+    text-align: center;
+}
+
+.header-calendar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+
+.header-calendar h1{
+    width: 100%;
+    font-size: 20px;
+}
+
+.dia-pasado {
+    background-color: gray;
+    color: white;
+}
+
+.dia-presente {
+    background-color: lightblue;
+    color: white;
+}
+
+.dia-seleccionado {
+    background-color: lightgreen;
+    color: white;
+}

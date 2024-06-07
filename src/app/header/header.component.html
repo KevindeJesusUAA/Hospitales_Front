@@ -11,8 +11,17 @@
           <li *ngIf="isAuth()" class="nav-item">
             <a class="nav-link active" routerLink="inicio" aria-current="page" href="#">Inicio</a>
           </li>
+          <li *ngIf="isAuth()" class="nav-item">
+            <a class="nav-link active" routerLink="reservar-cita" aria-current="page" href="#">Reservar Cita</a>
+          </li>
           <li *ngIf="!isAuth()" class="nav-item">
             <a class="nav-link active" routerLink="registro" aria-current="page" href="#">Registrarse</a>
+          </li>
+          <li *ngIf="isAuth()" class="nav-item">
+            <a class="nav-link active" routerLink="citas-reservadas" aria-current="page" href="#">Citas Reservadas</a>
+          </li>
+          <li *ngIf="isAuth()" class="nav-item">
+            <a class="nav-link active" routerLink="citas-personales" aria-current="page" href="#">Citas Personales</a>
           </li>
           <li *ngIf="isAdmin" class="nav-item">
             <a class="nav-link active" routerLink="altas" aria-current="page" href="#">Altas</a>

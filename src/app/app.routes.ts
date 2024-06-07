@@ -7,6 +7,9 @@ import { AltasDoctoresComponent } from './altas-doctores/altas-doctores.componen
 import { AltasHospitalesComponent } from './altas-hospitales/altas-hospitales.component';
 import { ConsultasComponent } from './consultas/consultas.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { ReservarCitaComponent } from '../reservaciones/reservar-cita/reservar-cita.component';
+import { CitasPersonalesComponent } from '../reservaciones/citas-personales/citas-personales.component';
+import { CitasReservadasComponent } from '../reservaciones/citas-reservadas/citas-reservadas.component';
 
 export const routes: Routes = [
 
@@ -19,6 +22,9 @@ export const routes: Routes = [
     {path: 'altas-doctores', component: AltasDoctoresComponent},
     {path: 'altas-hospitales', component: AltasHospitalesComponent},
     {path: 'consultas', component: ConsultasComponent},
+    {path: 'reservar-cita', component: ReservarCitaComponent},
+    {path: 'citas-personales', component: CitasPersonalesComponent},
+    {path: 'citas-reservadas', component: CitasReservadasComponent},
 
     {path: '', redirectTo: 'inicio', pathMatch: 'full'}, // Ruta por defecto
     {path: '**', component: IniciosesionComponent} // Ruta para cuando no se encuentra la ruta
