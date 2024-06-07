@@ -10,6 +10,7 @@ import { InicioComponent } from './inicio/inicio.component';
 import { ReservarCitaComponent } from '../reservaciones/reservar-cita/reservar-cita.component';
 import { CitasPersonalesComponent } from '../reservaciones/citas-personales/citas-personales.component';
 import { CitasReservadasComponent } from '../reservaciones/citas-reservadas/citas-reservadas.component';
+import { RecetaComponent } from './receta/receta.component';
 
 export const routes: Routes = [
 
@@ -25,6 +26,7 @@ export const routes: Routes = [
     {path: 'reservar-cita', component: ReservarCitaComponent},
     {path: 'citas-personales', component: CitasPersonalesComponent},
     {path: 'citas-reservadas', component: CitasReservadasComponent},
+    {path: 'receta', component: RecetaComponent},
 
     {path: '', redirectTo: 'inicio', pathMatch: 'full'}, // Ruta por defecto
     {path: '**', component: IniciosesionComponent} // Ruta para cuando no se encuentra la ruta
