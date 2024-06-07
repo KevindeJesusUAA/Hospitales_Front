@@ -20,6 +20,11 @@ export class AutenticacionService {
           this.usuarioAutenticado = true;
           this.userName.next(sessionStorage.getItem('username') || '');
         }
+        if (sessionStorage.getItem('autenticado') === 'true') {
+          this.usuarioAutenticado = true;
+          this.userName.next(sessionStorage.getItem('username') || '');
+          this.rol.next(sessionStorage.getItem('rol') || ''); // Recupera el rol del usuario
+        }
       }
     } else {
       console.log('sessionStorage no está disponible en este entorno.');

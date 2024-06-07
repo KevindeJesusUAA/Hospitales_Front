@@ -1,0 +1,12 @@
+.fecha-hora {
+    text-align: center;
+}
+  
+.fecha-hora p {
+    font-size: 2.5rem; /* Tamaño de fuente más grande */
+    margin: 0; /* Eliminar el margen predeterminado */
+}
+  
+.fecha-hora .hora {
+    font-weight: bold; /* Hacer la hora en negrita */
+}

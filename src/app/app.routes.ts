@@ -7,6 +7,7 @@ import { AltasDoctoresComponent } from './altas-doctores/altas-doctores.componen
 import { AltasHospitalesComponent } from './altas-hospitales/altas-hospitales.component';
 import { ConsultasComponent } from './consultas/consultas.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { RecetaComponent } from './receta/receta.component';
 
 export const routes: Routes = [
 
@@ -19,6 +20,7 @@ export const routes: Routes = [
     {path: 'altas-doctores', component: AltasDoctoresComponent},
     {path: 'altas-hospitales', component: AltasHospitalesComponent},
     {path: 'consultas', component: ConsultasComponent},
+    {path: 'receta', component: RecetaComponent},
 
     {path: '', redirectTo: 'inicio', pathMatch: 'full'}, // Ruta por defecto
     {path: '**', component: IniciosesionComponent} // Ruta para cuando no se encuentra la ruta
