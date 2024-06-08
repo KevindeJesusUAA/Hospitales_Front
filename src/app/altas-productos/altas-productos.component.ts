@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { AutenticacionService } from '../autenticacion.service';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AdministradorsService } from '../administradors.service';
 
 @Component({
   selector: 'app-altas-productos',
@@ -13,23 +14,34 @@ import { CommonModule } from '@angular/common';
 })
 export class AltasProductosComponent implements OnInit {
   productoForm: FormGroup;
-  hospitales: any[] = [
-    { id: 1, nombre: 'Hospital A' },
-    { id: 2, nombre: 'Hospital B' },
-    { id: 3, nombre: 'Hospital C' },
-  ];
+  hospitales: any[] = [];
 
-  constructor(private fb: FormBuilder, private auth: AutenticacionService) {
+  constructor(private fb: FormBuilder, private auth: AutenticacionService, private administradorsService: AdministradorsService) {
     this.productoForm = this.fb.group({
-      idProducto: ['', Validators.required],
+      idProductos: [null],
       nombre: ['', Validators.required],
       cantidad: ['', [Validators.required, Validators.min(1)]],
       categoria: ['', Validators.required],
-      Hospital_idHospital: ['', Validators.required]
+      Hospital_idHospital: ['', Validators.required],
+      precio: ['', [Validators.required, Validators.min(1)]], // Campo de precio
+      marca: ['', Validators.required] // Campo de marca
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.obtenerHospitales();
+  }
+
+  obtenerHospitales(): void {
+    this.administradorsService.getHospitales().subscribe(
+      (data: any[]) => {
+        this.hospitales = data;
+      },
+      (error) => {
+        console.error('Error al obtener hospitales:', error);
+      }
+    );
+  }
 
   onSubmit(): void {
     if (this.productoForm.valid) {
@@ -41,8 +53,10 @@ export class AltasProductosComponent implements OnInit {
   }
 
   guardarProducto(producto: any): void {
-    let productos = JSON.parse(localStorage.getItem('productos') || '[]');
-    productos.push(producto);
-    localStorage.setItem('productos', JSON.stringify(productos));
+    this.administradorsService.AddOrUpdateProducto(producto).subscribe(response => {
+      console.log('Doctor guardado en el servidor:', response);
+    }, error => {
+      console.error('Error al guardar la receta:', error);
+    });
   }
 }

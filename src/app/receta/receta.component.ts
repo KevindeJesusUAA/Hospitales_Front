@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import jsPDF from 'jspdf';
+import { DoctorService } from '../doctor.service';
+//import { DoctorService } from '../doctor.service';
+//import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-receta',
@@ -15,10 +18,10 @@ export class RecetaComponent implements OnInit {
   recetaForm: FormGroup;
   fechaActual: string = '';
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private doctorService: DoctorService) {
     this.recetaForm = this.fb.group({
-      idReceta: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
-      descripcion: ['', [Validators.required, Validators.maxLength(50)]]
+        idReceta: [null], // Dejarlo como null
+        Descripcion: ['', [Validators.required, Validators.maxLength(50)]]
     });
   }
 
@@ -32,28 +35,36 @@ export class RecetaComponent implements OnInit {
   }
 
   obtenerFecha(fecha: Date): string {
-    const dia = fecha.getDate().toString().padStart(2, '0');
-    const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
     const año = fecha.getFullYear();
-    return `${dia}/${mes}/${año}`;
+    const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
+    const dia = fecha.getDate().toString().padStart(2, '0');
+    return `${año}-${mes}-${dia}`;
   }
+
 
   onSubmit(): void {
     if (this.recetaForm.valid) {
       const receta = this.recetaForm.value;
       receta.fechaRec = this.fechaActual; // Agregar fecha de la receta
       this.guardarReceta(receta);
-      console.log('Receta guardada en localStorage:', receta);
       this.generarPDF(receta); // Generar el PDF después de guardar los datos
       this.recetaForm.reset();
     }
   }
 
   guardarReceta(receta: any): void {
+    this.doctorService.AddorUpdateReceta(receta).subscribe(response => {
+      console.log('Receta guardada en el servidor:', response);
+    }, error => {
+      console.error('Error al guardar la receta:', error);
+    });
+  }
+
+  /*guardarReceta(receta: any): void {
     let recetas = JSON.parse(localStorage.getItem('recetas') || '[]');
     recetas.push(receta);
     localStorage.setItem('recetas', JSON.stringify(recetas));
-  }
+  }*/
 
   generarPDF(receta: any): void {
     const doc = new jsPDF();
@@ -78,7 +89,7 @@ export class RecetaComponent implements OnInit {
 
       // Agregar los datos de la receta
       doc.setFontSize(14);
-      doc.text('ID Receta: ' + receta.idReceta, 10, 100);
+      //doc.text('ID Receta: ' + receta.idReceta, 10, 100);
       doc.text('Fecha Receta: ' + receta.fechaRec, 10, 110);
       doc.text('Descripción: ' + receta.descripcion, 10, 120);
 
