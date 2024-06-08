@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Cita } from '../cita.model';
-import { NgxQRCodeModule, NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
-import { CodigoqrService } from '../../app/codigoqr.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { PacienteService } from '../../app/paciente.service';
+import { AutenticacionService } from '../../app/autenticacion.service';
+import { response } from 'express';
 
 @Component({
   selector: 'app-citas-personales',
@@ -16,14 +17,12 @@ export class CitasPersonalesComponent implements OnInit {
 
   citas: Cita[] = [];
   todas: any[] = [];
-  elementType= NgxQrcodeElementTypes.URL;
-  correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
   
   datos: any;
   claves:any;
   muestra:boolean = false; // bandera para mostrar QR
 
-  constructor(){}
+  constructor(private paciente: PacienteService, private usuario: AutenticacionService){}
 
   ngOnInit(): void {
     this.cargarCitas();
@@ -31,20 +30,17 @@ export class CitasPersonalesComponent implements OnInit {
 
 
   cargarCitas():void{
-    /*this.firebase.cargarCita().subscribe((citas) => {
-      this.claves = Object.keys(citas);
-      this.todas = Object.values(citas);
-      console.log(this.todas);
-      console.log(this.claves);
+    const id = this.usuario.getIdUsuario();
+    let hospital = "";
+    const doctor = "";
+    
+    this.paciente.getHospitalPaciente(id).then((response:any) => {
+      if(response.length > 0)
+        hospital = response[0].nombre;
     });
 
-    this.firebase.citasde(this.login.iduslog()).subscribe((citas) => {
-      console.log(citas);
-      this.citas = Object.values(citas);
-    });*/
 
-
-    this.citas.sort((a, b) => {
+    /*this.citas.sort((a, b) => {
       if (a.year < b.year) {
         return -1;
       } else if (a.year == b.year) {
@@ -68,18 +64,19 @@ export class CitasPersonalesComponent implements OnInit {
       } else {
         return 1;
       }
-    });
+    });*/
   }
 
   findCita(cita:Cita):number{
     let cont = 0;
 
+    /*
     for (const i of this.todas) {
       if(i.dia == cita.dia && i.hora == cita.hora && i.id == cita.id && i.mesNombre == cita.mesNombre)
         break;
       
       cont++;
-    }
+    }*/
     return cont;
   }
 

@@ -21,18 +21,18 @@ export class ReservarCitaComponent implements OnInit {
   usuario: any;
   edad: number = 0;
   correoUsuario: string = "";
-  cita: Cita = {
+  /*cita: Cita = {
     id: "",
-    year: 0,
+    //year: 0,
     mes: 0,
     dia: 0,
-    hora: 0,
+    //hora: 0,
     paciente: '',
     diaNombre: '',
     mesNombre: '',
     edad: 0,
     doctor: ''
-  };
+  };*/
   citasFechaSeleccionada: Cita[] = [];
   selectedOption: number = 0;
   horas: any = [];
@@ -84,7 +84,7 @@ export class ReservarCitaComponent implements OnInit {
 
   reservarCita() {
     console.log(this.edad);
-    this.cita.year = this.fecha.year;
+    /*this.cita.year = this.fecha.year;
     this.cita.mes = this.fecha.mes;
     this.cita.dia = this.fecha.dia;
     this.cita.hora = this.horas[this.selectedOption];
@@ -92,9 +92,9 @@ export class ReservarCitaComponent implements OnInit {
     this.cita.doctor = this.doctor;
     this.cita.diaNombre = this.fecha.diaNombre;
     this.cita.mesNombre = this.fecha.mesNombre;
-    this.cita.edad = this.edad;
+    this.cita.edad = this.edad;*/
     //this.citasService.setNuevaCitaDB(this.cita);
-    this.enviaCorreo(this.cita);
+    //this.enviaCorreo(this.cita);
     //this.cita = this.citasService.nuevaCita();
     this.estadoFecha = false;
     this.doctor = '';
@@ -109,7 +109,7 @@ export class ReservarCitaComponent implements OnInit {
     let body = {
       correo: this.correoUsuario,
       asunto: `Nueva Cita Para ${this.usuario.nombre}`,
-      descripcion: `Su cita se ha programado para ${cita.diaNombre} ${cita.dia} de ${cita.mesNombre} del ${cita.year}`
+      //descripcion: `Su cita se ha programado para ${cita.diaNombre} ${cita.dia} de ${cita.mesNombre} del ${cita.year}`
     };
     console.log(body);
 

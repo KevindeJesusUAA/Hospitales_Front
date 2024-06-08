@@ -3,6 +3,7 @@ import { AutenticacionService } from '../autenticacion.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-iniciosesion',
@@ -17,6 +18,7 @@ export class IniciosesionComponent implements OnInit{
   password: string = '';
   btnIniciarSesion:boolean = false;
   mensaje:string = '';
+  sesionIniciada:boolean = false;
 
   //constructor(private apiwishop: ApiwishopService, private router:Router,private auth:AuthService) { }
   constructor(private rutaActiva:Router, private auth:AutenticacionService) { }
@@ -35,26 +37,19 @@ export class IniciosesionComponent implements OnInit{
     
     if (this.validaCorreo() && this.validaPassword()){
 
-      this.auth.setLogin('1', 'Alan Uzielo','doctor');
-
-      this.rutaActiva.navigate(['/inicio']);
-
-      //window.location.href = '/inicio';
-      /*this.apiwishop.iniciarSesion(this.correo, this.password).then((response: any) => {
-
-          if (response.success == true) {
-
-            console.log('Inicio de sesión exitoso');
-
-            this.auth.setLogin(response.userID, response.username);
-
-            this.router.navigate(['/inicio']);
-
-          } else {
-            console.log('Error al iniciar sesión, '+ response.info);
-          }
+      this.auth.verificaUsuario(this.correo, this.password).then((response: any) => {
+        if (response.length == 1) {
+          console.log('Inicio de sesión exitoso');
+          console.log(response[0]);
+          this.auth.setLogin(response[0].idCuenta, response[0].nombre, response[0].Roles_idRoles.toString());
+          this.rutaActiva.navigate(['/inicio']);
+        
+        }else{
+          console.log('Error al iniciar sesión, '+ response.info);
+          swal("Credenciales Incorrectas", "Vuelve a Intentarlo", "error");
         }
-      );*/    
+      });
+   
     }else{
       this.mensaje = 'Rellene todos los campos correctamente';
     }

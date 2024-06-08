@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import swal  from 'sweetalert';
@@ -8,6 +7,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { RouterLink } from '@angular/router';
+import { PacienteService } from '../paciente.service';
+import { DomseguroPipe } from '../domseguro.pipe';
+import { CommonModule } from '@angular/common';
 
 export interface PeriodicElement {
   name: string;
@@ -27,7 +29,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 @Component({
   selector: 'app-inicio',
   standalone: true,
-  imports: [CommonModule,RouterLink, FormsModule, MatGridListModule,MatCardModule,MatButtonModule,MatInputModule,MatTableModule],
+  imports: [DomseguroPipe,CommonModule,RouterLink, FormsModule, MatGridListModule,MatCardModule,MatButtonModule,MatInputModule,MatTableModule],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.css'
 })
@@ -42,6 +44,10 @@ export class InicioComponent {
   peso:number=0;
   imc:number=10;
   nombre:string="";
+
+  constructor(private apiPacientes: PacienteService){
+    //this.getPacientes();
+  }
 
   
   calcular(){
@@ -78,5 +84,11 @@ export class InicioComponent {
      }
 
     }
+  }
+
+  getPacientes(){
+    this.apiPacientes.getPacientes().then((response: any) => {
+      console.log(response);
+    });
   }
 }

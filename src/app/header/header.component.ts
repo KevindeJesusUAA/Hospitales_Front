@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AutenticacionService } from '../autenticacion.service';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
@@ -15,8 +15,7 @@ export class HeaderComponent implements OnInit{
 
   usuarioAutenticado: boolean = false;
   username: string = '';
-  isAdmin: boolean = false;
-  isDoctor: boolean = false;
+  rol = '';
   private userNameSubscription: Subscription = new Subscription();
   private rolSubscription: Subscription = new Subscription();
   mensaje: string = '';
@@ -32,19 +31,16 @@ export class HeaderComponent implements OnInit{
         (username) => {
           this.username = username
         }
-      );
+    );
 
     this.rolSubscription = this.auth.getRol().subscribe(
         (rol) => {
-          this.isAdmin = rol === 'admin';
+          this.rol = rol
         }
-      );
-    
-    this.rolSubscription = this.auth.getRol().subscribe(
-        (rol) => {
-          this.isDoctor = rol === 'doctor';
-        }
-      );
+    );
+
+    console.log('Rol del usuario: ' + this.rol + ' - ' + this.username	);
+
   }
 
   isAuth():boolean{

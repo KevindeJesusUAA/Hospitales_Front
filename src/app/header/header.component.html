@@ -11,22 +11,22 @@
           <li *ngIf="isAuth()" class="nav-item">
             <a class="nav-link active" routerLink="inicio" aria-current="page" href="#">Inicio</a>
           </li>
-          <li *ngIf="isAuth()" class="nav-item">
+          <li *ngIf="isAuth() && rol =='paciente'" class="nav-item">
             <a class="nav-link active" routerLink="reservar-cita" aria-current="page" href="#">Reservar Cita</a>
           </li>
           <li *ngIf="!isAuth()" class="nav-item">
             <a class="nav-link active" routerLink="registro" aria-current="page" href="#">Registrarse</a>
           </li>
-          <li *ngIf="isAuth()" class="nav-item">
-            <a class="nav-link active" routerLink="citas-reservadas" aria-current="page" href="#">Citas Reservadas</a>
+          <li *ngIf="isAuth() && rol == 'doctor'" class="nav-item">
+            <a class="nav-link active" routerLink="citas-reservadas" aria-current="page" href="#">Próximas Consultas</a>
           </li>
-          <li *ngIf="isAuth()" class="nav-item">
-            <a class="nav-link active" routerLink="citas-personales" aria-current="page" href="#">Citas Personales</a>
+          <li *ngIf="isAuth() && rol == 'paciente'" class="nav-item">
+            <a class="nav-link active" routerLink="citas-personales" aria-current="page" href="#">Mis Citas</a>
           </li>
-          <li *ngIf="isAdmin" class="nav-item">
+         <li *ngIf="isAuth() && rol == 'admin'" class="nav-item">
             <a class="nav-link active" routerLink="altas" aria-current="page" href="#">Altas</a>
           </li>
-          <li *ngIf="isDoctor" class="nav-item">
+          <li *ngIf="isAuth() && rol == 'doctor'" class="nav-item">
             <a class="nav-link active" routerLink="receta" aria-current="page" href="#">Receta</a>
           </li>
         </ul>
@@ -45,7 +45,7 @@
               {{mensaje}}, {{username}}
             </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" routerLink="favoritos" href="#">Productos Favoritos</a></li>
+                <!--<li><a class="dropdown-item" routerLink="favoritos" href="#">Productos Favoritos</a></li>-->
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" (click)="cerrarSesion()" href="#">Cerrar Sesión</a></li>
               </ul>

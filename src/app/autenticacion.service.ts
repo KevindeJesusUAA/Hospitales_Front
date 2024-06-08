@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { log } from 'console';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -11,8 +13,7 @@ export class AutenticacionService {
   private rol: BehaviorSubject<string> = new BehaviorSubject(''); // Para manejar el rol del usuario
 
 
-
-  constructor() { 
+  constructor(private http: HttpClient) { 
     // Recupera la información de autenticación almacenada en el sessionStorage.
     if (typeof sessionStorage !== 'undefined') {
       if (sessionStorage.getItem('autenticado')) {
@@ -31,31 +32,43 @@ export class AutenticacionService {
     }
   }
 
+  verificaUsuario(correo: string, password: string){
+
+    return this.http.post('http://localhost:3000/usuarios/login', {correo,password}).toPromise();
+  }
+
+
   // Establece la información de autenticación en el sessionStorage.
   setLogin(id: string, username: string, rol: string) {
     sessionStorage.setItem('autenticado', 'true');
     this.usuarioAutenticado = true;
     sessionStorage.setItem('id', id);
     sessionStorage.setItem('username', username);
+
+    if (rol == "1")
+      rol = 'admin';
+    else if (rol == "2")
+      rol = 'paciente';
+    else
+      rol = 'doctor';
+    console.log(rol);
+    
     sessionStorage.setItem('rol', rol); // Guarda el rol del usuario
     this.userName.next(username);
     this.rol.next(rol); // Actualiza el rol
   }
+
 
   // Devuelve el id del usuario autenticado.
   getIdUsuario(): string {
     return sessionStorage.getItem('id') || '';
   }
 
-  // Devuelve el id del usuario autenticado.
-  getAdmiUsuario(): string {
-    return sessionStorage.getItem('rol') || '';
-  }
-
   // Devuelve el nombre del usuario autenticado.
   getUsername(): BehaviorSubject<string> {
     return this.userName;
   }
+
 
   // Devuelve el rol del usuario autenticado.
   getRol(): BehaviorSubject<string> {
@@ -74,19 +87,12 @@ export class AutenticacionService {
     this.rol.next(''); // Resetea el rol
   }
 
+
   // Devuelve true si el usuario está autenticado y false en caso contrario.
   estaAutenticado(): boolean {
     return this.usuarioAutenticado;
   }
 
-  // Devuelve true si el usuario es administrador.
-  esAdministrador(): boolean {
-    return this.rol.value === 'admin';
-  }
-
-  esDoctor(): boolean {
-    return this.rol.value === 'doctor';
-  }
 
   getHoraActual(): string {
     const currentHour = new Date().getHours();
@@ -99,7 +105,6 @@ export class AutenticacionService {
     } else {
         formattedTime = 'Buenas noches';
     }
-
     return formattedTime;
   }
 }
