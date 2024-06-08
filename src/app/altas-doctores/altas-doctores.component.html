@@ -1,24 +1,26 @@
 <div class="container mt-4">
   <h2>Altas de Doctores</h2>
   <form [formGroup]="doctorForm" (ngSubmit)="onSubmit()">
-    <div class="mb-3">
+    <!--<div class="mb-3">
       <label for="cedulaProfesional" class="form-label">Cédula Profesional</label>
       <input type="text" class="form-control" id="cedulaProfesional" formControlName="cedulaProfesional">
       <div *ngIf="doctorForm.get('cedulaProfesional')?.invalid && doctorForm.get('cedulaProfesional')?.touched" class="text-danger">
         La cédula profesional es requerida y debe ser un número.
       </div>
     </div>
-    <div class="mb-3">
+  -->
+    <!--<div class="mb-3">
       <label for="nombre" class="form-label">Nombre</label>
       <input type="text" class="form-control" id="nombre" formControlName="nombre">
       <div *ngIf="doctorForm.get('nombre')?.invalid && doctorForm.get('nombre')?.touched" class="text-danger">
         El nombre es requerido.
       </div>
     </div>
+  -->
     <div class="mb-3">
-      <label for="especialidad" class="form-label">Especialidad</label>
-      <input type="text" class="form-control" id="especialidad" formControlName="especialidad">
-      <div *ngIf="doctorForm.get('especialidad')?.invalid && doctorForm.get('especialidad')?.touched" class="text-danger">
+      <label for="Especialidad" class="form-label">Especialidad</label>
+      <input type="text" class="form-control" id="Especialidad" formControlName="Especialidad">
+      <div *ngIf="doctorForm.get('Especialidad')?.invalid && doctorForm.get('Especialidad')?.touched" class="text-danger">
         La especialidad es requerida y debe tener máximo 50 caracteres.
       </div>
     </div>
@@ -53,9 +55,18 @@
         El estado es requerido y debe tener máximo 45 caracteres.
       </div>
     </div>
-    <div class="mb-3">
+    <!--<div class="mb-3">
       <label for="idCuenta" class="form-label">ID Cuenta</label>
       <input type="text" class="form-control" id="idCuenta" formControlName="idCuenta">
+      <div *ngIf="doctorForm.get('idCuenta')?.invalid && doctorForm.get('idCuenta')?.touched" class="text-danger">
+        El ID de la cuenta es requerido y debe ser un número.
+      </div>
+    </div>-->
+    <div class="mb-3">
+      <label for="idCuenta" class="form-label">ID Cuenta</label>
+      <select class="form-select" id="idCuenta" formControlName="idCuenta">
+        <option *ngFor="let usuario of usuarios" [value]="usuario.idCuenta">{{ usuario.idCuenta }}</option>
+      </select>
       <div *ngIf="doctorForm.get('idCuenta')?.invalid && doctorForm.get('idCuenta')?.touched" class="text-danger">
         El ID de la cuenta es requerido y debe ser un número.
       </div>

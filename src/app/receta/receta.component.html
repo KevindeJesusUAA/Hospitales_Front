@@ -6,15 +6,15 @@
     <form [formGroup]="recetaForm" (ngSubmit)="onSubmit()">
       <div class="mb-3">
         <label for="idReceta" class="form-label">ID Receta</label>
-        <input type="text" class="form-control" id="idReceta" formControlName="idReceta">
-        <div *ngIf="recetaForm.get('idReceta')?.invalid && recetaForm.get('idReceta')?.touched" class="text-danger">
+        <!--<input type="text" class="form-control" id="idReceta" formControlName="idReceta" disabled>
+        <div class="text-danger">
           El ID de la receta es requerido y debe ser un número.
-        </div>
+        </div>-->
       </div>
       <div class="mb-3">
         <label for="descripcion" class="form-label">Descripción</label>
-        <textarea class="form-control" id="descripcion" formControlName="descripcion"></textarea>
-        <div *ngIf="recetaForm.get('descripcion')?.invalid && recetaForm.get('descripcion')?.touched" class="text-danger">
+        <textarea class="form-control" id="Descripcion" formControlName="Descripcion"></textarea>
+        <div *ngIf="recetaForm.get('Descripcion')?.invalid && recetaForm.get('Descripcion')?.touched" class="text-danger">
           La descripción es requerida y debe tener máximo 50 caracteres.
         </div>
       </div>

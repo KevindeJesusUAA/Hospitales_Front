@@ -3,10 +3,10 @@
   <form [formGroup]="hospitalForm" (ngSubmit)="onSubmit()">
     <div class="mb-3">
       <label for="idHospital" class="form-label">ID Hospital</label>
-      <input type="text" class="form-control" id="idHospital" formControlName="idHospital">
+      <!--<input type="text" class="form-control" id="idHospital" formControlName="idHospital">
       <div *ngIf="hospitalForm.get('idHospital')?.invalid && hospitalForm.get('idHospital')?.touched" class="text-danger">
         El ID del hospital es requerido y debe ser un número.
-      </div>
+      </div>-->
     </div>
     <div class="mb-3">
       <label for="nombre" class="form-label">Nombre</label>

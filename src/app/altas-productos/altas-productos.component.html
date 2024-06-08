@@ -1,13 +1,13 @@
 <div class="container mt-4">
     <h2>Altas de Productos</h2>
     <form [formGroup]="productoForm" (ngSubmit)="onSubmit()">
-      <div class="mb-3">
+      <!--<div class="mb-3">
         <label for="idProducto" class="form-label">ID Producto</label>
         <input type="text" class="form-control" id="idProducto" formControlName="idProducto">
         <div *ngIf="productoForm.get('idProducto')?.invalid && productoForm.get('idProducto')?.touched" class="text-danger">
           El ID del producto es requerido.
         </div>
-      </div>
+      </div>-->
       <div class="mb-3">
         <label for="nombre" class="form-label">Nombre</label>
         <input type="text" class="form-control" id="nombre" formControlName="nombre">
@@ -29,14 +29,29 @@
           La categoría es requerida.
         </div>
       </div>
+
       <div class="mb-3">
         <label for="Hospital_idHospital" class="form-label">Hospital</label>
-        <select class="form-select" id="Hospital_idHospital" formControlName="Hospital_idHospital">
-          <option value="" disabled selected>Seleccione un hospital</option>
-          <option *ngFor="let hospital of hospitales" [value]="hospital.id">{{ hospital.nombre }}</option>
+        <select class="form-control" id="Hospital_idHospital" formControlName="Hospital_idHospital">
+          <option value="">Seleccione un hospital</option>
+          <option *ngFor="let hospital of hospitales" [value]="hospital.idHospital">{{ hospital.nombre }}</option>
         </select>
         <div *ngIf="productoForm.get('Hospital_idHospital')?.invalid && productoForm.get('Hospital_idHospital')?.touched" class="text-danger">
-          Seleccione un hospital.
+          El hospital es requerido.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="precio" class="form-label">Precio</label>
+        <input type="number" class="form-control" id="precio" formControlName="precio">
+        <div *ngIf="productoForm.get('precio')?.invalid && productoForm.get('precio')?.touched" class="text-danger">
+          El precio es requerido y debe ser mayor a 0.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="marca" class="form-label">Marca</label>
+        <input type="text" class="form-control" id="marca" formControlName="marca">
+        <div *ngIf="productoForm.get('marca')?.invalid && productoForm.get('marca')?.touched" class="text-danger">
+          La marca es requerida.
         </div>
       </div>
       <button type="submit" class="btn btn-primary" [disabled]="productoForm.invalid">Guardar</button>
