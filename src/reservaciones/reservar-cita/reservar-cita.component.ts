@@ -4,6 +4,8 @@ import swal from 'sweetalert';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CalendarioComponent } from '../calendario/calendario.component';
+import { PacienteService } from '../../app/paciente.service';
+import { AutenticacionService } from '../../app/autenticacion.service';
 
 @Component({
   selector: 'app-reservar-cita',
@@ -18,40 +20,33 @@ export class ReservarCitaComponent implements OnInit {
   fecha: any;
   fechaString: string | undefined;
   nombre: string = "";
-  usuario: any;
-  edad: number = 0;
-  correoUsuario: string = "";
-  /*cita: Cita = {
-    id: "",
-    //year: 0,
-    mes: 0,
-    dia: 0,
-    //hora: 0,
-    paciente: '',
-    diaNombre: '',
-    mesNombre: '',
-    edad: 0,
-    doctor: ''
-  };*/
   citasFechaSeleccionada: Cita[] = [];
   selectedOption: number = 0;
   horas: any = [];
   horasOcupadas: any = [];
   doctor: any = null;
+  doctores:any = [];
+  hospital = '';
+  hospitalID = '';
+  numerosc = '';
 
-  constructor(){
-    /*private firebase: FirebaseReservaService,private login: LoginServiceService) {
-    this.citasService.getCitas();
-    this.nombre = this.login.vnom();*/
-  }
+  constructor(private paciente: PacienteService, private auth: AutenticacionService){}
   
+
   ngOnInit() {
-    //this.cita = this.citasService.nuevaCita(); 
-    /*this.firebase.getDatosUsuario(this.login.iduslog()).subscribe((data) => {
-      this.usuario = data;
-      this.correoUsuario = this.usuario.email;
-    });*/
+    this.hospitalID = this.auth.getHospital();
+    console.log(this.hospitalID);
+    
+    this.paciente.getHospitalPaciente(this.auth.getIdUsuario()).then((hospital: any) => {
+      this.hospital = hospital[0].nombre;
+    });
+
+    this.paciente.getDoctores(this.hospitalID).then((doctores: any) => {
+      this.doctores = doctores;
+      console.log(this.doctores);
+    });
   }
+
 
   procesaPropagar(mensaje: any) {
     this.fecha = mensaje;
@@ -82,43 +77,42 @@ export class ReservarCitaComponent implements OnInit {
     }
   }
 
+
   reservarCita() {
-    console.log(this.edad);
-    /*this.cita.year = this.fecha.year;
-    this.cita.mes = this.fecha.mes;
-    this.cita.dia = this.fecha.dia;
-    this.cita.hora = this.horas[this.selectedOption];
-    this.cita.paciente = this.nombre;
-    this.cita.doctor = this.doctor;
-    this.cita.diaNombre = this.fecha.diaNombre;
-    this.cita.mesNombre = this.fecha.mesNombre;
-    this.cita.edad = this.edad;*/
-    //this.citasService.setNuevaCitaDB(this.cita);
-    //this.enviaCorreo(this.cita);
-    //this.cita = this.citasService.nuevaCita();
+    for (let i = 0; i < this.doctores.length; i++) {
+      if (this.doctores[i].nombre == this.doctor && this.hospitalID == this.doctores[i].idHospital) {
+        this.doctor = this.doctores[i];
+        break;
+      }
+    }
+    
+    let cedula = this.doctor.cedulaProfesional;
+    let hora = this.horas[this.selectedOption];
+
+    this.paciente.getNumeroSeguroSocialPaciente(this.auth.getIdUsuario()).then((paciente: any) => {
+
+      this.numerosc = paciente[0].numeroSeguro;
+
+      let cita = {
+        cedula: cedula,
+        numerosc: this.numerosc,
+        fecha: this.fecha.year+'-'+this.fecha.mes+'-'+this.fecha.dia,
+        hora: hora + ':00:00',
+        ubicacion: this.hospital
+      };
+
+      this.paciente.setConsultaNueva(cita).then((res: any) => {
+        if (res.Status == 'Consulta creada') {
+          swal('Cita reservada', 'La cita ha sido reservada exitosamente', 'success');
+        }else{
+          swal('Error', 'No se pudo reservar la cita', 'error');
+        }
+      });
+    });
+
+
     this.estadoFecha = false;
     this.doctor = '';
-    this.edad = 0;
     this.horas = [];
-    swal("Cita Reservada", "La cita se ha reservado correctamente", "success");
   }
-
-  enviaCorreo(cita:Cita):void{
-    
-    
-    let body = {
-      correo: this.correoUsuario,
-      asunto: `Nueva Cita Para ${this.usuario.nombre}`,
-      //descripcion: `Su cita se ha programado para ${cita.diaNombre} ${cita.dia} de ${cita.mesNombre} del ${cita.year}`
-    };
-    console.log(body);
-
-    /*this.correo.enviarCorreo("https://consultorio.fly.dev/api/correo",body).then((data) => {
-      console.log(data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });*/
-  }
-
 }

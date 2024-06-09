@@ -38,10 +38,10 @@ export class IniciosesionComponent implements OnInit{
     if (this.validaCorreo() && this.validaPassword()){
 
       this.auth.verificaUsuario(this.correo, this.password).then((response: any) => {
-        if (response.length == 1) {
+        if (response.length > 0) {
           console.log('Inicio de sesión exitoso');
           console.log(response[0]);
-          this.auth.setLogin(response[0].idCuenta, response[0].nombre, response[0].Roles_idRoles.toString());
+          this.auth.setLogin(response[0].idCuenta, response[0].nombre, response[0].Roles_idRoles.toString(),response[0].Hospital_idHospital.toString());
           this.rutaActiva.navigate(['/inicio']);
         
         }else{

@@ -8,6 +8,7 @@
                     <th id="color" scope="col">Fecha</th>
                     <th id="color" scope="col">Hora</th>
                     <th id="color" scope="col">Hospital</th>
+                    <th id="color" scope="col">Consultorio</th>
                 </tr>
             </thead>
 
@@ -17,6 +18,7 @@
                     <td id="color">{{ cita.fecha }}</td>
                     <td id="color" [innerHTML]="cita.hora + ':00 - ' + (cita.hora + 1) + ':00'"></td>
                     <td id="color">{{ cita.hospital }}</td>
+                    <td id="color">{{ cita.consultorio }}</td>
                 </tr>
             </tbody>
         </table>

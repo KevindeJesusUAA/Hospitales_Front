@@ -39,7 +39,7 @@ export class AutenticacionService {
 
 
   // Establece la información de autenticación en el sessionStorage.
-  setLogin(id: string, username: string, rol: string) {
+  setLogin(id: string, username: string, rol: string, hospital: string) {
     sessionStorage.setItem('autenticado', 'true');
     this.usuarioAutenticado = true;
     sessionStorage.setItem('id', id);
@@ -51,11 +51,11 @@ export class AutenticacionService {
       rol = 'paciente';
     else
       rol = 'doctor';
-    console.log(rol);
     
     sessionStorage.setItem('rol', rol); // Guarda el rol del usuario
     this.userName.next(username);
     this.rol.next(rol); // Actualiza el rol
+    sessionStorage.setItem('hospital', hospital);
   }
 
 
@@ -67,6 +67,10 @@ export class AutenticacionService {
   // Devuelve el nombre del usuario autenticado.
   getUsername(): BehaviorSubject<string> {
     return this.userName;
+  }
+
+  getHospital(): string {
+    return sessionStorage.getItem('hospital') || '';
   }
 
 

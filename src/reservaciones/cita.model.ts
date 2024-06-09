@@ -4,4 +4,5 @@ export interface Cita {
     fecha: string,
     hora: string,
     hospital: string,
+    consultorio: string,
 }

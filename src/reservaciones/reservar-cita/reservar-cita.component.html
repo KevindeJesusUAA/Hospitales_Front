@@ -14,36 +14,19 @@
         <div class="col-md-8">
           <label for="doctor" class="form-label">Doctor(a)</label>
           <select class="form-select" aria-label="Default select example" [(ngModel)]="doctor" required>
-            <option value="Meredith Grey">Meredith Grey</option>
-            <option value="Addison Montgomery">Addison Montgomery</option>
-            <option value="Shaun Murphy">Shaun Murphy</option>
-            <option value="Conrad Hawkins">Conrad Hawkins</option>
-            <option value="Gregory House">Gregory House</option>
-            <option value="Lisa Cuddy">Lisa Cuddy</option>
-            <option value="James Wilson">James Wilson</option>
-            <option value="Derek Shepherd">Derek Shepherd</option>
-            <option value="Emiliano Navarro">Emiliano Navarro</option>
-            <option value="Leonardo Fuentes">Leonardo Fuentes</option>
-            <option value="Santiago Morales">Santiago Morales</option>
-            <option value="Gabriel Mendoza">Gabriel Mendoza</option>
-            <option value="Adrián Cervantes">Adrián Cervantes</option>
-            <option value="Valentina Castillo">Valentina Castillo</option>
-            <option value="Camila Espinoza">Camila Espinoza</option>
-            <option value="Fernanda Guzmán">Fernanda Guzmán</option>
-            <option value="Isabella Rosales">Isabella Rosales</option>
-            <option value="Daniela Torres">Daniela Torres</option>
+            <option *ngFor="let doctor of doctores; let i = index" [ngValue]="i"  [value]="doctor.nombre">{{ doctor.nombre }}</option>
           </select>
         </div>
         
         <div class="col-md-4">
-          <label for="edad" class="form-label">Tu Edad</label>
-          <input type="number" class="form-control" id="edad" [(ngModel)]="edad" required min="0">
+          <label for="edad" class="form-label">Hospital</label>
+          <input type="text" class="form-control" id="edad" disabled value="{{hospital}}" required>
         </div>
         <div class="col-md-12">
           <div *ngIf="estadoFecha; then fechaActiva; else seleccionaFecha"></div>
         </div>
         <div class="col-12">
-          <div *ngIf="nombre != '' && estadoFecha && horas.length && edad!=null && doctor!=null; then botonReservar"></div>
+          <div *ngIf="estadoFecha && horas.length && doctor != ''; then botonReservar"></div>
         </div>
       </div>
     </div>

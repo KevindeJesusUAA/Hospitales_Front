@@ -18,6 +18,21 @@ export class PacienteService {
     return this.http.get('http://localhost:3000/hospital/'+id).toPromise();
   }
 
+  getCitasPaciente(id: string){
+    return this.http.get('http://localhost:3000/consultapersonal/'+id).toPromise();
+  }
+
+  getDoctores(id: string){
+    return this.http.get('http://localhost:3000/doctores/hospital/'+id).toPromise();
+  }
+
+  getNumeroSeguroSocialPaciente(id: string){
+    return this.http.get('http://localhost:3000/pacientes/numerosc/'+id).toPromise();
+  }
+
+  setConsultaNueva(consulta: any){
+    return this.http.post('http://localhost:3000/consultas/crear', consulta).toPromise();
+  }
 
   addOrUpdatePaciente(paciente: any): Observable<any> {
     return this.http.post(`http://localhost:3000/pacientes`, paciente, {
