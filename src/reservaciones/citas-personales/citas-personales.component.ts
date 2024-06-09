@@ -35,11 +35,11 @@ export class CitasPersonalesComponent implements OnInit {
           if(response.length > 0)
             for(let i = 0; i < response.length; i++){
               let id = response[i].idConsulta;
-              let doctor = response[i].nombre;
+              let nombre = response[i].nombre;
               let fecha = new Date(response[i].fechaCon).toLocaleDateString();
               let hora = response[i].hora;
               let consultorio = response[i].consultorio;
-              this.citas.push({id, doctor, fecha, hora, hospital, consultorio});
+              this.citas.push({id, nombre, fecha, hora, hospital, consultorio});
             } 
         });
       }

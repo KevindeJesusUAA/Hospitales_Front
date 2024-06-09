@@ -14,6 +14,14 @@ export class DoctorService {
     return this.http.get(`${this.apiUrl}/recetas`);
   }
 
+  getHospitalDoctor(id: string){
+    return this.http.get('http://localhost:3000/hospital/'+id).toPromise();
+  }
+
+  getCitasDoctor(id: string){
+    return this.http.get('http://localhost:3000/consultadoctor/'+id).toPromise();
+  }
+
   AddorUpdateReceta(receta: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/AddorUpdateReceta`, receta, {
       headers: new HttpHeaders({

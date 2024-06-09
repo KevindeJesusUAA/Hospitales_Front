@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AutenticacionService } from '../autenticacion.service';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { PacienteService } from '../paciente.service';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-registro',
@@ -11,7 +13,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './registro.component.html',
   styleUrl: './registro.component.css'
 })
-export class RegistroComponent {
+export class RegistroComponent implements OnInit{
 
 
   username: string = '';
@@ -20,8 +22,10 @@ export class RegistroComponent {
   password2: string = '';
   mensaje: string = '';
   btnRegistro:boolean = false;
+  hospitales: any = [];
+  hospital = '';
 
-  constructor(private router: Router, private auth: AutenticacionService) {
+  constructor(private router: Router, private auth: AutenticacionService, private paciente: PacienteService) {
 
     if (this.auth.estaAutenticado()) {
       this.router.navigate(['/inicio']);
@@ -32,39 +36,52 @@ export class RegistroComponent {
     }
   }
 
+  ngOnInit(){
+    this.paciente.getHospitales().then((hospitales: any) => {
+      this.hospitales = hospitales;
+      console.log(this.hospitales);
+    });
+  }
+
   registrarUsuario() {
 
     this.setBtnRegistro();
 
-    if (this.validaCorreo() && this.validaPassword() && this.validaUsername()) {
+    if (this.validaCorreo() && this.validaPassword() && this.validaUsername() && this.validarHospital()) {
+
+      for (let i = 0; i < this.hospitales.length; i++){
+        if (this.hospitales[i].nombre == this.hospital){
+          this.hospital = this.hospitales[i].idHospital;
+          break;
+        }
+      }
 
       const usuario = {
         correo: this.correo,
-        password: this.password1
+        password: this.password1,
+        nombre: this.username,
+        apellido: 'López',
+        telefono: '1234567890',
+        direccion: 'Calle 123',
+        edad : 20,
+        fechanacimiento: '2000-01-01',
+        sexo : 'M',
+        rol: 2,
+        hospital: this.hospital
       }
-        
-      this.router.navigate(['/login'],{state: {usuario}});
-      
 
+      console.log(usuario);
 
-        /*this.apiwishop.registrarUsuario(this.username, this.correo, this.password1).then((response: any) => {
-            
-            if (response.success == true) {
-
-              console.log('Usuario registrado correctamente');
-
-              const usuario = {
-                correo: this.correo,
-                password: this.password1
-              }
-              
-              this.router.navigate(['/iniciosesion'],{state: {usuario}});
-
-            } else {
-              console.log('Error al registrar el usuario, '+ response.info);
-            }
-          }
-        ); */   
+      this.paciente.setNuevoRegistro(usuario).then((response: any) => {
+        console.log(response);
+        if (response.Status == 'Usuario agregado'){
+          swal('Usuario registrado correctamente', 'Ahora puedes iniciar sesión', 'success');
+          this.router.navigate(['/iniciosesion']);
+        }else{
+          swal('Error al registrar el usuario', 'Intente de nuevo', 'error');
+        }
+      });
+  
     }else{
       this.mensaje = 'Rellene todos los campos correctamente';
     }
@@ -92,6 +109,13 @@ export class RegistroComponent {
 
   validaUsername():boolean{
     if (this.username.length < 3)
+      return false;
+    
+    return true;
+  }
+
+  validarHospital():boolean{
+    if (this.hospital == '')
       return false;
     
     return true;

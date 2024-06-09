@@ -37,6 +37,16 @@
         <div *ngIf="!validaPassword() && btnRegistroClick()" class="alert alert-danger alerta" role="alert">
             {{mensaje}}
         </div>
+
+        <p class="pForm">Tu Hospital<br>
+            <select class="form-select" aria-label="Default select example" [(ngModel)]="hospital" required>
+                <option *ngFor="let hosp of hospitales; let i = index" [ngValue]="i"  [value]="hosp.nombre">{{ hosp.nombre }}</option>
+            </select>
+        </p>
+
+        <div *ngIf="!validarHospital() && btnRegistroClick()" class="alert alert-danger alerta" role="alert">
+            Por favor selecciona un hospital
+        </div>
         
         <p><button (click)="registrarUsuario()" type="button" id="btnForm" >Registrarse</button></p>
         

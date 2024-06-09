@@ -14,7 +14,7 @@
 
             <tbody>
                 <tr *ngFor="let cita of citas; let i = index">
-                    <td id="color">{{ cita.doctor }}</td>
+                    <td id="color">{{ cita.nombre }}</td>
                     <td id="color">{{ cita.fecha }}</td>
                     <td id="color" [innerHTML]="cita.hora + ':00 - ' + (cita.hora + 1) + ':00'"></td>
                     <td id="color">{{ cita.hospital }}</td>

@@ -1,1 +1,32 @@
-<p>citas-reservadas works!</p>
+<div class="container mt-3 min-altura">
+    <div *ngIf="citas else noCitas">
+        <h1>Citas Reservadas</h1>
+        <table class="table table-info table-striped">
+            <thead>
+                <tr>
+                    <th id="color" scope="col">Paciente</th>
+                    <th id="color" scope="col">Fecha</th>
+                    <th id="color" scope="col">Hora</th>
+                    <th id="color" scope="col">Hospital</th>
+                    <th id="color" scope="col">Consultorio</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let cita of citas; let i = index">
+                    <td id="color">{{ cita.nombre }}</td>
+                    <td id="color">{{ cita.fecha }}</td>
+                    <td id="color" [innerHTML]="cita.hora + ':00 - ' + (cita.hora + 1) + ':00'"></td>
+                    <td id="color">{{ cita.hospital }}</td>
+                    <td id="color">{{ cita.consultorio }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<ng-template #noCitas>
+    <div class="alert alert-danger " role="alert">
+        No tienes citas por el momento
+    </div>
+</ng-template>
