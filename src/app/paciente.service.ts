@@ -42,6 +42,10 @@ export class PacienteService {
     return this.http.post('http://localhost:3000/usuarios/nuevo', registro).toPromise();
   }
 
+  setNuevoPaciente(paciente: any){
+    return this.http.post('http://localhost:3000/pacientes/nuevo', paciente).toPromise();
+  }
+
   addOrUpdatePaciente(paciente: any): Observable<any> {
     return this.http.post(`http://localhost:3000/pacientes`, paciente, {
       headers: new HttpHeaders({

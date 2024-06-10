@@ -70,11 +70,26 @@ export class RegistroComponent implements OnInit{
         hospital: this.hospital
       }
 
-      console.log(usuario);
-
       this.paciente.setNuevoRegistro(usuario).then((response: any) => {
-        console.log(response);
+        
         if (response.Status == 'Usuario agregado'){
+          let numeroSC = this.generateRandomNumber();
+          let idCuenta = response.idCuenta;
+          
+          let nuevoPaciente = {
+            numeroSeguro: numeroSC,
+            curp : 'LOPL000101HDFLPS09',
+            turno : 'Matutino',
+            tipo_de_sangre : 'O+',
+            alergias: 'Ninguna',
+            condicionesCronicas: 'Ninguna',
+            idCuenta: idCuenta
+          }
+
+          this.paciente.setNuevoPaciente(nuevoPaciente).then((response: any) => {
+            console.log(response);
+          });
+
           swal('Usuario registrado correctamente', 'Ahora puedes iniciar sesión', 'success');
           this.router.navigate(['/iniciosesion']);
         }else{
@@ -119,6 +134,10 @@ export class RegistroComponent implements OnInit{
       return false;
     
     return true;
+  }
+
+  generateRandomNumber(): number{
+    return Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000;
   }
 
   setBtnRegistro(){

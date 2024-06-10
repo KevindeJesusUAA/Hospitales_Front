@@ -1,0 +1,23 @@
+<div class="contenedor">
+
+    <div class="frame">
+        <div class="titulo">
+            <h1>No. Productos Por Categoría</h1>
+        </div>
+        <iframe src="http://localhost:5601/app/visualize#/edit/81fd7f80-26cd-11ef-8990-5db0d3ef5494?embed=true&type=pie&indexPattern=18efb040-26cc-11ef-8990-5db0d3ef5494&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-15m,to:now))&_a=(filters:!(),linked:!f,query:(language:kuery,query:''),uiState:(),vis:(aggs:!((enabled:!t,id:'1',params:(),schema:metric,type:count),(enabled:!t,id:'2',params:(field:categoria.keyword,missingBucket:!f,missingBucketLabel:Missing,order:desc,orderBy:'1',otherBucket:!f,otherBucketLabel:Other,size:100),schema:segment,type:terms)),params:(addLegend:!t,addTooltip:!t,isDonut:!t,labels:(last_level:!t,show:!f,truncate:100,values:!t),legendPosition:right,type:pie),title:'Productos%20compartir',type:pie))" height="600" width="800"></iframe>
+    </div>
+
+    <div class="frame">
+        <div class="titulo">
+            <h1>Salario de Doctores por Especialidad</h1>
+        </div>
+        <iframe src="http://localhost:5601/app/visualize#/create?embed=true&type=histogram&indexPattern=b9e8d610-26cd-11ef-8990-5db0d3ef5494&_g=(filters:!(),refreshInterval:(pause:!f,value:10000),time:(from:now-1h,to:now))&_a=(filters:!(),linked:!f,query:(language:kuery,query:''),uiState:(vis:(colors:('Average%20salariodoc':%23584477))),vis:(aggs:!((enabled:!t,id:'1',params:(field:salariodoc),schema:metric,type:avg),(enabled:!t,id:'2',params:(field:especialidad.keyword,missingBucket:!f,missingBucketLabel:Missing,order:desc,orderBy:'1',otherBucket:!f,otherBucketLabel:Other,size:100),schema:segment,type:terms)),params:(addLegend:!t,addTimeMarker:!f,addTooltip:!t,categoryAxes:!((id:CategoryAxis-1,labels:(filter:!t,show:!t,truncate:100),position:bottom,scale:(type:linear),show:!t,style:(),title:(),type:category)),grid:(categoryLines:!f),labels:(show:!f),legendPosition:right,seriesParams:!((data:(id:'1',label:'Average%20salariodoc'),drawLinesBetweenPoints:!t,lineWidth:2,mode:stacked,show:!t,showCircles:!t,type:histogram,valueAxis:ValueAxis-1)),thresholdLine:(color:%23E7664C,show:!f,style:full,value:10,width:1),times:!(),type:histogram,valueAxes:!((id:ValueAxis-1,labels:(filter:!f,rotate:0,show:!t,truncate:100),name:LeftAxis-1,position:left,scale:(mode:normal,type:linear),show:!t,style:(),title:(text:'Average%20salariodoc'),type:value))),title:'',type:histogram))" height="600" width="800"></iframe>
+    </div>
+
+    <div class="frame">
+        <div class="titulo">
+            <h1>Alergias Comúnes</h1>
+        </div>
+        <iframe src="http://localhost:5601/app/visualize#/create?embed=true&type=pie&indexPattern=902372b0-26d0-11ef-8990-5db0d3ef5494&_g=(filters:!(),refreshInterval:(pause:!f,value:10000),time:(from:now-1h,to:now))&_a=(filters:!(),linked:!f,query:(language:kuery,query:''),uiState:(),vis:(aggs:!((enabled:!t,id:'1',params:(customLabel:fe),schema:metric,type:count),(enabled:!t,id:'2',params:(field:alergias.keyword,missingBucket:!f,missingBucketLabel:Missing,order:desc,orderBy:'1',otherBucket:!f,otherBucketLabel:Other,size:5),schema:segment,type:terms)),params:(addLegend:!t,addTooltip:!t,isDonut:!t,labels:(last_level:!t,show:!f,truncate:100,values:!t),legendPosition:right,type:pie),title:'',type:pie))" height="600" width="800"></iframe>
+    </div>
+</div>

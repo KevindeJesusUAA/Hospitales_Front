@@ -26,6 +26,9 @@
          <li *ngIf="isAuth() && rol == 'admin'" class="nav-item">
             <a class="nav-link active" routerLink="altas" aria-current="page" href="#">Altas</a>
           </li>
+          <li *ngIf="isAuth() && rol == 'admin'" class="nav-item">
+            <a class="nav-link active" routerLink="estadisticas" aria-current="page" href="#">Estadísticas</a>
+          </li>
           <li *ngIf="isAuth() && rol == 'doctor'" class="nav-item">
             <a class="nav-link active" routerLink="receta" aria-current="page" href="#">Receta</a>
           </li>
